@@ -118,9 +118,6 @@ func (recipe *Recipe) Validate() error {
 	if recipe.Length == "" {
 		return fmt.Errorf("missing key: length")
 	}
-	if recipe.Source == "" {
-		return fmt.Errorf("missing key: source")
-	}
 
 	return nil
 }
