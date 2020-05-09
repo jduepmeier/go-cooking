@@ -1,0 +1,39 @@
+
+.source p, .source img {
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    text-align: right;
+    float: right;
+}
+
+.recipe {
+    min-height: 200px;
+}
+
+.evensplit {
+    height: 50%;
+    position: relative;
+}
+
+.freshness {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+}
+
+.success {
+    background-color: #56915C;
+}
+
+.warning {
+    background-color: #FFC857;
+}
+
+.error {
+    background-color: #871300;
+}
+
+.button {
+    float: right;
+}

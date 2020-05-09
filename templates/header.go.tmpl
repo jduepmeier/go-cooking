@@ -1,0 +1,19 @@
+<!DOCTPYE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rezepte</title>
+        <link rel="stylesheet" type="text/css" href="/static/mini-default.min.css" />
+        <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    </head>
+    </body>
+        <header>
+            {{ if not .NoHeader }}
+            <a class="button" href="/add">Hinzufügen</a>
+            <a class="button" href="javascript:history.back()">Zurück</a>
+            <a class="button" href="/logout">Logout</a>
+            {{ end }}
+        </header>
+        <main>
+            {{ .Message.HTML }}

@@ -1,0 +1,34 @@
+{{ template "header.go.tmpl" . }}
+
+<h1>Rezepte</h1>
+
+<div id="recipes" class="row">
+    {{ range .Recipes }}
+        <div class="recipe card large">
+            <div class="section">
+                <h3 class="name"><a href="/edit/{{ .ID }}">{{ .Name }}</a></h3>
+            </div>
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="length evensplit">
+                                {{ .Length }}
+                            </div>
+                            <div class="evensplit">
+                                <span class="freshness">
+                                {{ .Freshness.HTML }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="source col-sm-4">
+                            {{ .SourceHTML }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{ end }}
+</div>
+
+{{ template "footer.go.tmpl" . }}
