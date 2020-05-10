@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"path"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
@@ -11,14 +12,21 @@ import (
 
 func init() {
 	PublicHandlers["/static/{filename}"] = handleStatic
+	PublicHandlers["/favicon.ico"] = handleStatic
 }
 
 func handleStatic(server *Server) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
-		filename, ok := mux.Vars(request)["filename"]
-		if !ok {
-			writer.WriteHeader(http.StatusNotFound)
-			return
+		var filename string
+		var ok bool
+		if strings.HasSuffix(request.URL.Path, "favicon.ico") {
+			filename = "favicon.ico"
+		} else {
+			filename, ok = mux.Vars(request)["filename"]
+			if !ok {
+				writer.WriteHeader(http.StatusNotFound)
+				return
+			}
 		}
 
 		filepath := path.Join(server.Config.StaticDir, path.Base(filename))
@@ -45,6 +53,8 @@ func handleStatic(server *Server) http.HandlerFunc {
 			contentType = "image/svg+xml"
 		case ".png":
 			contentType = "image/png"
+		case ".ico":
+			contentType = "image/x-icon"
 		default:
 			logrus.Errorf("%s is not an allowed type", ext)
 			writer.WriteHeader(http.StatusNotFound)

@@ -191,9 +191,11 @@ func (server *Server) Serve() error {
 	}
 	mux := mux.NewRouter()
 	for pattern, handleFunc := range Handlers {
+		logrus.Info("register %s", pattern)
 		mux.Handle(pattern, server.sessionHandler(handleFunc(server)))
 	}
 	for pattern, handleFunc := range PublicHandlers {
+		logrus.Infof("register %s", pattern)
 		mux.Handle(pattern, handleFunc(server))
 	}
 	err = http.ListenAndServe(server.Config.Addr, mux)
