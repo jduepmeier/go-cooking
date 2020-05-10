@@ -42,7 +42,7 @@ func handleStatic(server *Server) http.HandlerFunc {
 		case ".gif":
 			contentType = "image/gif"
 		case ".svg":
-			contentType = "image/svg"
+			contentType = "image/svg+xml"
 		case ".png":
 			contentType = "image/png"
 		default:

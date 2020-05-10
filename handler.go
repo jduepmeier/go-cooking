@@ -16,6 +16,7 @@ type TemplateData interface {
 type BaseTemplateData struct {
 	message  StatusMessage
 	NoHeader bool
+	Printer  bool
 }
 
 // Message returns the message saved.

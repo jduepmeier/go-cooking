@@ -26,6 +26,7 @@ func handleRoot(server *Server) http.HandlerFunc {
 		variables := RootTemplateData{
 			Recipes: recipes,
 		}
+		variables.Printer = true
 		SendTemplate(writer, request, server, "root.go.tmpl", &variables)
 	}
 }

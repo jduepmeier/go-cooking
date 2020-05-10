@@ -1,29 +1,26 @@
 {{ template "header.go.tmpl" . }}
-
-<h1>Rezepte</h1>
-
 <div id="recipes" class="row">
     {{ range .Recipes }}
-        <div class="recipe card large">
+        <div id="recipe-{{ .ID }}" class="recipe card large">
             <div class="section">
+                <span class="printericons">
+                    <img class="printericon" src="/static/printer-svgrepo-com.svg" onclick="printerhide({{ .ID }})" />
+                    <img class="hidden noprintericon" src="/static/noprinter-svgrepo-com.svg" onclick="printershow({{ .ID }})" />
+                </span>
                 <h3 class="name"><a href="/edit/{{ .ID }}">{{ .Name }}</a></h3>
             </div>
             <div class="section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm">
-                            <div class="length evensplit">
-                                {{ .Length }}
-                            </div>
-                            <div class="evensplit">
-                                <span class="freshness">
-                                {{ .Freshness.HTML }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="source col-sm-4">
-                            {{ .SourceHTML }}
-                        </div>
+                <div class="card-grid">
+                    <div class="length">
+                        {{ .Length }}
+                    </div>
+                    <div class="source">
+                        {{ .SourceHTML }}
+                    </div>
+                    <div class="freshness">
+                        <span>
+                        {{ .Freshness.HTML }}
+                        </span>
                     </div>
                 </div>
             </div>

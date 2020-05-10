@@ -11,17 +11,6 @@
     min-height: 200px;
 }
 
-.evensplit {
-    height: 50%;
-    position: relative;
-}
-
-.freshness {
-    display: inline-block;
-    position: absolute;
-    bottom: 0;
-}
-
 .success {
     background-color: #56915C;
 }
@@ -34,6 +23,63 @@
     background-color: #871300;
 }
 
-.button {
+.right {
     float: right;
+}
+
+header h1 {
+    display: inline-block;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+}
+
+.freshness {
+    position: relative;
+}
+
+.freshness span {
+    position: absolute;
+    bottom: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.printericons img {
+    width: 1em;
+    float: right;
+    cursor: pointer;
+}
+
+.printericonsall img {
+    width: 1em;
+}
+
+@media print {
+    header {
+        display: none;
+    }
+
+    #recipes {
+        display: grid !important;
+        grid-template-columns: 49% 49%;
+    }
+
+    .recipe {
+        width: 100% - 2px !important;
+        max-width: 100% !important;
+    }
+
+    a, a:visited {
+        color: #222 !important;
+    }
+
+    .printerhide {
+        display: none;
+    }
 }

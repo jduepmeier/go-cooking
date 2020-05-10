@@ -1,13 +1,11 @@
 {{ template "header.go.tmpl" . }}
         <form action="/login" method="POST">
             <div class="input-group vertical">
-
                 <label for="name">Name:</label>
                 <input type="text" name="username" />
                 <label for="length">Password</label>
                 <input type="password" name="password" />
-
-                <input type="submit" value="Login" />
             </div>
+            <input type="submit" value="Login" />
         </form>
 {{ template "footer.go.tmpl" . }}
