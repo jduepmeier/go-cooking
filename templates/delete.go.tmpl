@@ -1,0 +1,9 @@
+{{ template "header.go.tmpl" . }}
+        <form action="/delete/{{ .Recipe.ID }}" method="POST">
+            {{ with .Recipe }}
+            <p>Rezept {{ .Name }} löschen?</p>
+            <input type="submit" value="Löschen" />
+            <a class="button" href="javascript:history.back()">Abbrechen</a>
+            {{ end }}
+        </form>
+{{ template "footer.go.tmpl" . }}

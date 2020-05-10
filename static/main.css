@@ -37,6 +37,11 @@ header h1 {
     grid-template-rows: 50% 50%;
 }
 
+.headerbox {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
 .freshness {
     position: relative;
 }
@@ -50,9 +55,23 @@ header h1 {
     display: none;
 }
 
+.actions {
+    text-align: right;
+}
+
+.actions .button {
+    background-color: unset;
+    vertical-align: middle;
+    margin: 0.2rem;
+}
+
+.actions .button:hover {
+    background: var(--button-hover-back-color);
+    border-color: var(--button-hover-border-color);
+}
+
 .printericons img {
     width: 1em;
-    float: right;
     cursor: pointer;
 }
 

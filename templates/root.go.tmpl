@@ -2,12 +2,15 @@
 <div id="recipes" class="row">
     {{ range .Recipes }}
         <div id="recipe-{{ .ID }}" class="recipe card large">
-            <div class="section">
-                <span class="printericons">
-                    <img class="printericon" src="/static/printer-svgrepo-com.svg" onclick="printerhide({{ .ID }})" />
-                    <img class="hidden noprintericon" src="/static/noprinter-svgrepo-com.svg" onclick="printershow({{ .ID }})" />
-                </span>
+            <div class="section headerbox">
                 <h3 class="name"><a href="/edit/{{ .ID }}">{{ .Name }}</a></h3>
+                <div class="actions printerhide">
+                    <span class="button printericons">
+                        <img class="printericon" src="/static/printer-svgrepo-com.svg" onclick="printerhide({{ .ID }})" />
+                        <img class="hidden noprintericon" src="/static/noprinter-svgrepo-com.svg" onclick="printershow({{ .ID }})" />
+                    </span>
+                    <a class="button" href="/delete/{{ .ID }}">x</a>
+                </div>
             </div>
             <div class="section">
                 <div class="card-grid">
