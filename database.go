@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	// import sqlite3 sql driver. Must be blank import for loading the init register function.
+	"github.com/gorilla/securecookie"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/sirupsen/logrus"
 
@@ -349,4 +350,23 @@ func (storage *Storage) GetAllUsers() ([]User, error) {
 	}
 
 	return users, rows.Err()
+}
+
+// GetOrCreateSessionCookieKey returns the session cookie key from database or creates it.
+func (storage *Storage) GetOrCreateSessionCookieKey() ([]byte, error) {
+	row := storage.db.QueryRow("SELECT value FROM meta WHERE key = 'sessionkey'")
+	var base64Key string
+	err := row.Scan(&base64Key)
+	if err == nil {
+		key, err := base64.StdEncoding.DecodeString(base64Key)
+		if err == nil {
+			return key, err
+		}
+	}
+	logrus.Warn("cannot get session key form db: %s", err)
+
+	key := securecookie.GenerateRandomKey(64)
+	base64Key = base64.StdEncoding.EncodeToString(key)
+	_, err = storage.db.Exec("INSERT INTO meta (key, value) VALUES ('sessionkey', :key)", sql.Named("key", base64Key))
+	return key, err
 }

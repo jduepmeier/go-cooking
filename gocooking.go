@@ -11,7 +11,6 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/gorilla/mux"
-	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
@@ -180,9 +179,13 @@ func (server *Server) watchTemplates() (err error) {
 
 // Serve creates a http socket and serves the server.
 func (server *Server) Serve() error {
-	server.SessionStore = sessions.NewCookieStore(securecookie.GenerateRandomKey(64))
+	key, err := server.Storage.GetOrCreateSessionCookieKey()
+	if err != nil {
+		logrus.Errorf("Could not persist session key: %s. Using temporary one...", err)
+	}
+	server.SessionStore = sessions.NewCookieStore(key)
 	go server.watchTemplates()
-	err := server.loadTemplates()
+	err = server.loadTemplates()
 	if err != nil {
 		return err
 	}
