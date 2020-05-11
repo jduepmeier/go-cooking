@@ -27,10 +27,11 @@ func handleEdit(server *Server) http.HandlerFunc {
 				return
 			}
 			recipe := Recipe{
-				ID:     id,
-				Name:   request.PostForm.Get("name"),
-				Length: request.PostForm.Get("length"),
-				Source: request.PostForm.Get("source"),
+				ID:          id,
+				Name:        request.PostForm.Get("name"),
+				Description: request.PostForm.Get("description"),
+				Length:      request.PostForm.Get("length"),
+				Source:      request.PostForm.Get("source"),
 			}
 			freshness := request.PostForm.Get("freshness")
 			err = recipe.ParseFreshness(freshness)

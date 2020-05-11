@@ -39,7 +39,7 @@ header h1 {
 
 .headerbox {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 75% 25%;
 }
 
 .freshness {

@@ -3,7 +3,10 @@
     {{ range .Recipes }}
         <div id="recipe-{{ .ID }}" class="recipe card large">
             <div class="section headerbox">
+                <div>
                 <h3 class="name"><a href="/edit/{{ .ID }}">{{ .Name }}</a></h3>
+                <p class="description">{{ .Description }}</p>
+                </div>
                 <div class="actions printerhide">
                     <span class="button printericons">
                         <img class="printericon" src="/static/printer-svgrepo-com.svg" onclick="printerhide({{ .ID }})" />

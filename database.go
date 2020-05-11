@@ -50,15 +50,15 @@ func (f Freshness) HTML() string {
 
 const (
 	// StatementAdd adds a recipe to database.
-	StatementAdd = "INSERT INTO recipes(name, length, freshness, source) VALUES(:name, :length, :freshness, :source)"
+	StatementAdd = "INSERT INTO recipes(name, description, length, freshness, source) VALUES(:name, :description, :length, :freshness, :source)"
 	// StatementUpdate updates a recipe.
-	StatementUpdate = "UPDATE recipes SET name = :name, length = :length, freshness = :freshness, source = :source WHERE id = :id"
+	StatementUpdate = "UPDATE recipes SET name = :name, description = :description, length = :length, freshness = :freshness, source = :source WHERE id = :id"
 	// StatementDelete deletes a recipe from database.
 	StatementDelete = "DELETE FROM recipes WHERE id = :id"
 	// StatementGetAll returns all recipes from database.
-	StatementGetAll = "SELECT id, name, length, freshness, source FROM recipes"
+	StatementGetAll = "SELECT id, name, description, length, freshness, source FROM recipes"
 	// StatementGet returns the recipe with the given id from database.
-	StatementGet = "SELECT id, name, length, freshness, source FROM recipes WHERE id = :id"
+	StatementGet = "SELECT id, name, description, length, freshness, source FROM recipes WHERE id = :id"
 	// StatementGetUser returns the user with the given username from database.
 	StatementGetUser = "SELECT username, password FROM user WHERE username = :username"
 	// StatementAddUser adds a user to the database.
@@ -78,11 +78,12 @@ type Storage struct {
 
 // Recipe contains all infos about a recipe.
 type Recipe struct {
-	ID        uint64
-	Name      string
-	Length    string
-	Freshness Freshness
-	Source    string
+	ID          uint64
+	Name        string
+	Description string
+	Length      string
+	Freshness   Freshness
+	Source      string
 }
 
 // SourceHTML returns the source field as html code.
@@ -241,7 +242,7 @@ func (storage *Storage) GetRecipes() ([]Recipe, error) {
 
 	for rows.Next() {
 		recipe := Recipe{}
-		err = rows.Scan(&recipe.ID, &recipe.Name, &recipe.Length, &recipe.Freshness, &recipe.Source)
+		err = rows.Scan(&recipe.ID, &recipe.Name, &recipe.Description, &recipe.Length, &recipe.Freshness, &recipe.Source)
 		if err != nil {
 			return recipes, err
 		}
@@ -257,6 +258,7 @@ func (storage *Storage) Add(recipe Recipe) error {
 	logrus.Infof("add %v", recipe)
 	_, err := storage.Statements["add"].Exec(
 		sql.Named("name", &recipe.Name),
+		sql.Named("description", &recipe.Description),
 		sql.Named("length", &recipe.Length),
 		sql.Named("freshness", &recipe.Freshness),
 		sql.Named("source", &recipe.Source),
@@ -275,6 +277,7 @@ func (storage *Storage) Update(recipe Recipe) error {
 	_, err := storage.Statements["update"].Exec(
 		sql.Named("id", &recipe.ID),
 		sql.Named("name", &recipe.Name),
+		sql.Named("description", &recipe.Description),
 		sql.Named("length", &recipe.Length),
 		sql.Named("freshness", &recipe.Freshness),
 		sql.Named("source", &recipe.Source),
@@ -289,6 +292,7 @@ func (storage *Storage) Get(id uint64) (Recipe, error) {
 	err := row.Scan(
 		&recipe.ID,
 		&recipe.Name,
+		&recipe.Description,
 		&recipe.Length,
 		&recipe.Freshness,
 		&recipe.Source,

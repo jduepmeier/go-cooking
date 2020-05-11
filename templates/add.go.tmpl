@@ -4,6 +4,8 @@
             <div class="input-group vertical">
                 <label for="name">Name:</label>
                 <input type="text" required name="name" value="{{ .Name }}" />
+                <label for="description">Beschreibung:</label>
+                <input type="text" name="description" value="{{ .Description }}" />
                 <label for="length">Länge:</label>
                 <input type="text" required name="length" value="{{ .Length }}" />
                 <select name="freshness" required value="{{ .Freshness }}">
