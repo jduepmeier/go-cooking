@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"html"
+	"html/template"
 	"image/color"
 	"net/url"
 	"sort"
@@ -35,17 +36,13 @@ const (
 type Freshness int
 
 // HTML return the freshness value as html formatted scala.
-func (f Freshness) HTML() string {
+func (f Freshness) HTML() template.HTML {
 	var builder strings.Builder
 
-	for i := 0; i < int(MaxFreshness); i++ {
-		if i < int(f) {
-			builder.WriteString("&#9679;")
-		} else {
-			builder.WriteString("&#9675;")
-		}
+	for i := int(MaxFreshness); i >= int(f); i-- {
+		builder.WriteString(`<img class="freshness-img" src="/static/karotte.svg" />`)
 	}
-	return builder.String()
+	return template.HTML(builder.String())
 }
 
 const (
@@ -89,27 +86,27 @@ type Recipe struct {
 // SourceHTML returns the source field as html code.
 // If it is a url it will be converted to qrcode.
 // Otherwise it will be returned as text.
-func (recipe *Recipe) SourceHTML() string {
+func (recipe *Recipe) SourceHTML() template.HTML {
 	_, err := url.ParseRequestURI(recipe.Source)
 	if err != nil {
-		return fmt.Sprintf("<p>%s</p>", recipe.Source)
+		return template.HTML(fmt.Sprintf("<p>%s</p>", recipe.Source))
 	}
 	size := 256
 	htmlSource := html.EscapeString(recipe.Source)
 	png, err := qrcode.New(recipe.Source, qrcode.Highest)
 	if err != nil {
 		logrus.Errorf("could not encode qr code for %s", recipe.Source)
-		return fmt.Sprintf(`<a href=%q>%q<a />`, htmlSource, htmlSource)
+		return template.HTML(fmt.Sprintf(`<a href=%q>%q<a />`, htmlSource, htmlSource))
 	}
 	png.BackgroundColor = color.Transparent
 	pngEncoded, err := png.PNG(size)
 	if err != nil {
 		logrus.Errorf("could not encode qr code for %s", recipe.Source)
-		return fmt.Sprintf(`<a href=%q>%q<a />`, htmlSource, htmlSource)
+		return template.HTML(fmt.Sprintf(`<a href=%q>%q<a />`, htmlSource, htmlSource))
 	}
 
 	png64 := base64.StdEncoding.EncodeToString(pngEncoded)
-	return fmt.Sprintf(`<a href=%q><img width="%d" height="%d" alt=%q src="data:image/png;base64,%s" /></a>`, htmlSource, size, size, htmlSource, png64)
+	return template.HTML(fmt.Sprintf(`<a href=%q><img width="%d" height="%d" alt=%q src="data:image/png;base64,%s" /></a>`, htmlSource, size, size, htmlSource, png64))
 }
 
 // Validate validates the struct for missing or broken values.

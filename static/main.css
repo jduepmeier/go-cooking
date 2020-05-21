@@ -11,6 +11,7 @@
     min-height: 200px;
 }
 
+
 .success {
     background-color: #56915C;
 }
@@ -51,6 +52,10 @@ header h1 {
     bottom: 0;
 }
 
+.freshness-img {
+    width: 1.5em;
+}
+
 .hidden {
     display: none;
 }
@@ -75,8 +80,20 @@ header h1 {
     cursor: pointer;
 }
 
+.printericonsall {
+    vertical-align: sub;
+}
+
 .printericonsall img {
     width: 1em;
+}
+
+.description:empty:before, .printericonsall:before {
+    content: "\200b";
+}
+
+.hide-recipe {
+    display: none;
 }
 
 @media print {
@@ -88,10 +105,19 @@ header h1 {
         display: grid !important;
         grid-template-columns: 49% 49%;
     }
+    
+    .headerbox {
+        display: grid;
+        grid-template-columns: 100%;
+    }
 
     .recipe {
         width: 100% - 2px !important;
         max-width: 100% !important;
+    }
+    .recipe:nth-child(8n+0) {
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
     }
 
     a, a:visited {

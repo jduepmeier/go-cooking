@@ -42,3 +42,32 @@ function showall() {
         setcard(card, '.printericon', '.noprintericon');
     })
 }
+
+function search() {
+    let search = document.querySelector('#search')
+    if (search.value == '') {
+        document.querySelectorAll('.recipe').forEach((elem) => {
+            elem.classList.remove("hide-recipe");
+        });
+        return;
+    }
+    let results = fuzzysort.go(search.value, window.recipes, {
+        allowTypo: true,
+        keys: ['Name', 'Description'],
+    });
+
+    let ids = []
+    results.forEach((result) => {
+        ids.push(result.obj.ID)
+    });
+
+    window.recipes.forEach((recipe) => {
+        let id = recipe.ID;
+        let elem = document.querySelector(`#recipe-${id}`);
+        if (ids.indexOf(recipe.ID) < 0) {
+            elem.classList.add("hide-recipe");
+        } else {
+            elem.classList.remove("hide-recipe");
+        }
+    });
+}

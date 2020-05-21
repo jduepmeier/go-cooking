@@ -4,10 +4,10 @@ package cooking
 import (
 	"fmt"
 	"html"
+	"html/template"
 	"net/http"
 	"path"
 	"strings"
-	"text/template"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/gorilla/mux"
@@ -66,12 +66,12 @@ type StatusMessage struct {
 }
 
 // HTML returns the html encoded status message.
-func (message StatusMessage) HTML() string {
+func (message StatusMessage) HTML() template.HTML {
 	msg := ""
 	if message.Message != "" {
 		msg = fmt.Sprintf(`<div class=%q>%s</div>`, message.Class, html.EscapeString(message.Message))
 	}
-	return msg
+	return template.HTML(msg)
 }
 
 // Authenticate authenticate a user in
