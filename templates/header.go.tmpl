@@ -13,7 +13,9 @@
         <header>
             <a class="button" href="/">Rezepte</a>
             {{ if not .NoHeader }}
-            <div class="right">
+            <label class="button" id="navbar-button" for="navbar-collapse" />...</label>
+            <input type="checkbox" id="navbar-collapse">
+            <div id="buttons" class="right">
                 {{ if .Printer }}
                 <input type="text" id="search" placeholder="Suche" onchange="search()" />
                 <span class="button printericonsall">

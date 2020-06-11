@@ -128,3 +128,33 @@ header h1 {
         display: none;
     }
 }
+
+#navbar-collapse {
+    position: absolute;
+    left: -100vw;
+}
+
+#navbar-collapse:checked ~ #buttons {
+    display: block !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+    #buttons {
+        display: none;
+    }
+
+    header {
+        height: max-content !important;
+    }
+
+    #navbar-button {
+        display: block !important;
+    }    
+}
+
+#navbar-button {
+    display: none;
+    float: right;
+    cursor: pointer;
+}
