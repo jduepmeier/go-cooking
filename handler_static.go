@@ -1,8 +1,8 @@
 package cooking
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"path"
 	"strings"
 
@@ -37,7 +37,7 @@ func handleStatic(server *Server) http.HandlerFunc {
 
 		filepath := path.Join(server.Config.StaticDir, filename)
 
-		content, err := ioutil.ReadFile(filepath)
+		content, err := os.ReadFile(filepath)
 		if err != nil {
 			logrus.Errorf("cannnot open file %s: %s", filename, err)
 			writer.WriteHeader(http.StatusNotFound)

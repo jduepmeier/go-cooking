@@ -1,7 +1,6 @@
 package cooking
 
 import (
-	"cooking/database"
 	"database/sql"
 	"encoding/base64"
 	"fmt"
@@ -12,6 +11,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/jduepmeier/go-cooking/database"
 
 	// import sqlite3 sql driver. Must be blank import for loading the init register function.
 	"github.com/gorilla/securecookie"
