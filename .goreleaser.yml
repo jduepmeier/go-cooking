@@ -10,17 +10,8 @@ builds:
       - CGO_ENABLED=1
     goos:
       - linux
-      - darwin
     goarch:
       - amd64
-      - arm
-      - arm64
-    goarm:
-      - '6'
-      - '7'
-    ignore:
-      - goos: darwin
-        goarch: '386'
     binary: gocooking
     main: ./cmd/gocooking
     ldflags:
