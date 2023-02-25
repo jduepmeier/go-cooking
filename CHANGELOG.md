@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.1.0 (2023-02-25)
+
 ### Feat
 
 - **go.mod**: rename module to github path
@@ -35,9 +37,12 @@
 - add CHANGELOG
 
 ### Build
+
+- **go.sum**: sync with go.mod
 - **makefile**: add test target
 - **goreleaser**: add config
 - **makefile**: depend on go.mod and go.sum for build
 
 ### ci
+
 - **github-actions**: add codeql, go and release
