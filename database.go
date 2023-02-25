@@ -364,7 +364,7 @@ func (storage *Storage) GetOrCreateSessionCookieKey() ([]byte, error) {
 			return key, err
 		}
 	}
-	logrus.Warn("cannot get session key form db: %s", err)
+	logrus.Warnf("cannot get session key form db: %s", err)
 
 	key := securecookie.GenerateRandomKey(64)
 	base64Key = base64.StdEncoding.EncodeToString(key)
