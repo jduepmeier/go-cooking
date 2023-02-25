@@ -7,4 +7,12 @@ bin:
 	mkdir -p bin
 
 clean:
-	rm -f bin/gocooking
+	rm -rf bin
+
+.PHONY: test
+test:
+	go test -cover -tags test -v ./...
+
+test-coverage: bin
+	go test -coverprofile=bin/coverage.out -tags test ./...
+	go tool cover -html bin/coverage.out
