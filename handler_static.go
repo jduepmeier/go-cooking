@@ -1,18 +1,30 @@
 package cooking
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"path"
+	"regexp"
 	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 )
 
+var (
+	validFilenameCharacters = regexp.MustCompile(`^[a-zA-Z0-9.\-_]+$`)
+)
+
 func init() {
 	PublicHandlers["/static/{filename}"] = handleStatic
 	PublicHandlers["/favicon.ico"] = handleStatic
+}
+
+func sanitizeFilename(filename string) (string, bool) {
+	filename = strings.Replace(filename, "\n", "", -1)
+	filename = strings.Replace(filename, "\r", "", -1)
+
+	return filename, validFilenameCharacters.MatchString(filename)
 }
 
 func handleStatic(server *Server) http.HandlerFunc {
@@ -29,9 +41,22 @@ func handleStatic(server *Server) http.HandlerFunc {
 			}
 		}
 
-		filepath := path.Join(server.Config.StaticDir, path.Base(filename))
+		filename, ok = sanitizeFilename(filename)
+		if !ok {
+			logrus.Debugf("filename %q does not match allowed pattern", filename)
+			writer.WriteHeader(http.StatusNotFound)
+			return
+		}
 
-		content, err := ioutil.ReadFile(filepath)
+		filename = path.Base(filename)
+		if filename == "." || filename == "/" {
+			writer.WriteHeader(http.StatusNotFound)
+			return
+		}
+
+		filepath := path.Join(server.Config.StaticDir, filename)
+
+		content, err := os.ReadFile(filepath)
 		if err != nil {
 			logrus.Errorf("cannnot open file %s: %s", filename, err)
 			writer.WriteHeader(http.StatusNotFound)

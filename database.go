@@ -1,7 +1,6 @@
 package cooking
 
 import (
-	"cooking/database"
 	"database/sql"
 	"encoding/base64"
 	"fmt"
@@ -12,6 +11,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/jduepmeier/go-cooking/database"
 
 	// import sqlite3 sql driver. Must be blank import for loading the init register function.
 	"github.com/gorilla/securecookie"
@@ -123,7 +124,7 @@ func (recipe *Recipe) Validate() error {
 
 // ParseFreshness parses the freshness value and adds it to the recipe.
 func (recipe *Recipe) ParseFreshness(freshness string) error {
-	value, err := strconv.ParseInt(freshness, 10, 64)
+	value, err := strconv.ParseInt(freshness, 10, 32)
 	if err != nil {
 		return err
 	}
@@ -364,7 +365,7 @@ func (storage *Storage) GetOrCreateSessionCookieKey() ([]byte, error) {
 			return key, err
 		}
 	}
-	logrus.Warn("cannot get session key form db: %s", err)
+	logrus.Warnf("cannot get session key form db: %s", err)
 
 	key := securecookie.GenerateRandomKey(64)
 	base64Key = base64.StdEncoding.EncodeToString(key)

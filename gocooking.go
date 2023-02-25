@@ -191,7 +191,7 @@ func (server *Server) Serve() error {
 	}
 	mux := mux.NewRouter()
 	for pattern, handleFunc := range Handlers {
-		logrus.Info("register %s", pattern)
+		logrus.Infof("register %s", pattern)
 		mux.Handle(pattern, server.sessionHandler(handleFunc(server)))
 	}
 	for pattern, handleFunc := range PublicHandlers {
@@ -213,10 +213,10 @@ func (server *Server) sessionHandler(handler http.HandlerFunc) http.HandlerFunc 
 		}
 		user, ok := session.Values["username"]
 		if ok {
-			logrus.Info("user %s found", user)
+			logrus.Infof("user %s found", user)
 			if userData, ok := user.(string); ok {
 				if userData != "" {
-					logrus.Info("user %v could be parsed", userData)
+					logrus.Infof("user %v could be parsed", userData)
 					handler(writer, request)
 					return
 				}

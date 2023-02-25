@@ -1,9 +1,10 @@
 package main
 
 import (
-	"cooking"
 	"fmt"
 	"os"
+
+	"github.com/jduepmeier/go-cooking"
 
 	"github.com/jessevdk/go-flags"
 	"github.com/sirupsen/logrus"
