@@ -1,6 +1,6 @@
 .PHONY: clean
 
-bin/gocooking: bin *.go database/*.go cmd/gocooking/*.go
+bin/gocooking: bin *.go database/*.go cmd/gocooking/*.go go.mod go.sum
 	go build -o bin/gocooking cmd/gocooking/*.go
 
 bin:
