@@ -8,7 +8,7 @@ import (
 	"github.com/jessevdk/go-flags"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/ssh/terminal"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 type opts struct {
