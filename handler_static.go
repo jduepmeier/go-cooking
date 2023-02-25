@@ -4,15 +4,27 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"regexp"
 	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 )
 
+var (
+	validFilenameCharacters = regexp.MustCompile(`^[a-zA-Z0-9.\-_]+$`)
+)
+
 func init() {
 	PublicHandlers["/static/{filename}"] = handleStatic
 	PublicHandlers["/favicon.ico"] = handleStatic
+}
+
+func sanitizeFilename(filename string) (string, bool) {
+	filename = strings.Replace(filename, "\n", "", -1)
+	filename = strings.Replace(filename, "\r", "", -1)
+
+	return filename, validFilenameCharacters.MatchString(filename)
 }
 
 func handleStatic(server *Server) http.HandlerFunc {
@@ -27,6 +39,13 @@ func handleStatic(server *Server) http.HandlerFunc {
 				writer.WriteHeader(http.StatusNotFound)
 				return
 			}
+		}
+
+		filename, ok = sanitizeFilename(filename)
+		if !ok {
+			logrus.Debugf("filename %q does not match allowed pattern", filename)
+			writer.WriteHeader(http.StatusNotFound)
+			return
 		}
 
 		filename = path.Base(filename)
