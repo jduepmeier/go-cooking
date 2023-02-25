@@ -29,7 +29,13 @@ func handleStatic(server *Server) http.HandlerFunc {
 			}
 		}
 
-		filepath := path.Join(server.Config.StaticDir, path.Base(filename))
+		filename = path.Base(filename)
+		if filename == "." || filename == "/" {
+			writer.WriteHeader(http.StatusNotFound)
+			return
+		}
+
+		filepath := path.Join(server.Config.StaticDir, filename)
 
 		content, err := ioutil.ReadFile(filepath)
 		if err != nil {
