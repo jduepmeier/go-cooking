@@ -123,7 +123,7 @@ func (recipe *Recipe) Validate() error {
 
 // ParseFreshness parses the freshness value and adds it to the recipe.
 func (recipe *Recipe) ParseFreshness(freshness string) error {
-	value, err := strconv.ParseInt(freshness, 10, 64)
+	value, err := strconv.ParseInt(freshness, 10, 32)
 	if err != nil {
 		return err
 	}
