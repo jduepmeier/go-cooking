@@ -1,7 +1,7 @@
 .PHONY: clean
 
 bin/gocooking: bin *.go database/*.go cmd/gocooking/*.go go.mod go.sum
-	go build -o bin/gocooking cmd/gocooking/*.go
+	CGO_ENABLED=1 go build -o bin/gocooking cmd/gocooking/*.go
 
 bin:
 	mkdir -p bin
