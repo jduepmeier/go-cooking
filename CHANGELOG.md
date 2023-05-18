@@ -1,4 +1,11 @@
-## Unreleased
+## 0.1.1 (2023-05-18)
+
+### Fix
+
+- **deps**: update module golang.org/x/crypto to v0.9.0
+- **deps**: update module github.com/sirupsen/logrus to v1.9.2
+- **deps**: update module golang.org/x/crypto to v0.8.0
+- **deps**: update module golang.org/x/crypto to v0.7.0
 
 ## 0.1.0 (2023-02-25)
 
