@@ -1,3 +1,15 @@
+## 0.1.4 (2023-11-10)
+
+### Fix
+
+- **deps**: update module github.com/gorilla/mux to v1.8.1
+- **deps**: update module github.com/gorilla/sessions to v1.2.2
+- **deps**: update module golang.org/x/crypto to v0.15.0
+- **deps**: update module github.com/gorilla/securecookie to v1.1.2
+- **deps**: update module github.com/mattn/go-sqlite3 to v1.14.18
+- **deps**: update module github.com/fsnotify/fsnotify to v1.7.0
+- **deps**: update module golang.org/x/crypto to v0.14.0
+
 ## 0.1.3 (2023-09-10)
 
 ### Fix
