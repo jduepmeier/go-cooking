@@ -1,3 +1,12 @@
+## 0.1.7 (2024-06-29)
+
+### Fix
+
+- **deps**: update module golang.org/x/crypto to v0.24.0
+- **deps**: update module github.com/gorilla/sessions to v1.3.0
+- **deps**: update module github.com/jessevdk/go-flags to v1.6.1
+- **deps**: update module golang.org/x/crypto to v0.23.0
+
 ## 0.1.6 (2024-04-03)
 
 ### Fix
