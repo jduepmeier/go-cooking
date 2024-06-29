@@ -1,4 +1,4 @@
-FROM docker.io/library/golang:1.22.3-alpine AS builder
+FROM docker.io/library/golang:1.22.4-alpine AS builder
 
 RUN apk add sqlite make gcc musl-dev
 COPY . /app
