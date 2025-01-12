@@ -1,3 +1,14 @@
+## 0.1.8 (2025-01-12)
+
+### Fix
+
+- **deps**: update module github.com/gorilla/sessions to v1.4.0
+- **deps**: update module golang.org/x/crypto to v0.32.0
+- **dep**: update golang => 1.23
+- **deps**: update module github.com/mattn/go-sqlite3 to v1.14.24
+- **deps**: update module golang.org/x/crypto to v0.31.0
+- **deps**: update module github.com/fsnotify/fsnotify to v1.8.0
+
 ## 0.1.7 (2024-06-29)
 
 ### Fix
