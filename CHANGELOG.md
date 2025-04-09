@@ -1,3 +1,11 @@
+## 0.1.10 (2025-04-09)
+
+### Fix
+
+- **deps**: update module github.com/fsnotify/fsnotify to v1.9.0
+- **deps**: update module github.com/mattn/go-sqlite3 to v1.14.27
+- **deps**: update module golang.org/x/crypto to v0.37.0
+
 ## 0.1.9 (2025-02-09)
 
 ### Fix
