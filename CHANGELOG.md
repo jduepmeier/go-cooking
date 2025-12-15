@@ -1,3 +1,9 @@
+## 0.1.14 (2025-12-15)
+
+### Fix
+
+- **deps**: update module golang.org/x/crypto to v0.46.0
+
 ## 0.1.13 (2025-10-11)
 
 ### Fix
