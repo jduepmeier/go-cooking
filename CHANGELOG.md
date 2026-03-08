@@ -1,3 +1,11 @@
+## 0.1.15 (2026-03-08)
+
+### Fix
+
+- **deps**: update module golang.org/x/crypto to v0.48.0
+- **deps**: update module github.com/mattn/go-sqlite3 to v1.14.34
+- **deps**: update module github.com/sirupsen/logrus to v1.9.4
+
 ## 0.1.14 (2025-12-15)
 
 ### Fix
