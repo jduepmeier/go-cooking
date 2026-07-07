@@ -2,7 +2,7 @@ module github.com/jduepmeier/go-cooking
 
 go 1.25.0
 
-toolchain go1.26.2
+toolchain go1.26.5
 
 require (
 	github.com/fsnotify/fsnotify v1.10.1
