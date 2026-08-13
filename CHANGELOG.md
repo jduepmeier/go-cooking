@@ -1,3 +1,10 @@
+## 0.1.17 (2026-08-13)
+
+### Fix
+
+- **deps**: update module github.com/mattn/go-sqlite3 to v1.14.49
+- **deps**: update module golang.org/x/crypto to v0.55.0
+
 ## 0.1.16 (2026-05-06)
 
 ### Fix
