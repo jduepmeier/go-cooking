@@ -1,6 +1,6 @@
 module github.com/jduepmeier/go-cooking
 
-go 1.25.0
+go 1.26.0
 
 toolchain go1.26.5
 
@@ -13,13 +13,13 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.49
 	github.com/sirupsen/logrus v1.9.4
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
-	golang.org/x/crypto v0.55.0
+	golang.org/x/crypto v0.57.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
 	github.com/kr/pretty v0.3.1 // indirect
-	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/term v0.45.0 // indirect
+	golang.org/x/sys v0.48.0 // indirect
+	golang.org/x/term v0.46.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
